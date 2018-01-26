@@ -19,7 +19,6 @@ public class MainPresenterTest {
 
         assertEquals(1, _mainPresenter.countErrorLogin());
         assertEquals(2, _mainPresenter.countErrorLogin());
-        assertEquals(3, _mainPresenter.countErrorLogin());
         assertTrue(_mainPresenter.isMaxErrorLogin());
     }
 
@@ -53,7 +52,7 @@ public class MainPresenterTest {
         MainView _mainView = mock(MainView.class);
         MainPresenter _mainPresenter = new MainPresenter(_mainView);
 
-        _mainPresenter.isLoginSuccess("codemobiles","test");
+        _mainPresenter.isLoginSuccess("codemobiles","testtt");
         verify(_mainView).showLoginInCorrect();
     }
 
@@ -62,13 +61,30 @@ public class MainPresenterTest {
         MainView _mainView = mock(MainView.class);
         MainPresenter _mainPresenter = new MainPresenter(_mainView);
 
-        _mainPresenter.isLoginSuccess("codemobiles","test");
-        _mainPresenter.isLoginSuccess("codemobiles","test");
-        _mainPresenter.isLoginSuccess("codemobiles","test");
-        _mainPresenter.isLoginSuccess("codemobiles","test");
+        _mainPresenter.isLoginSuccess("codemobiles","testtt");
+        _mainPresenter.isLoginSuccess("codemobiles","testtt");
+        _mainPresenter.isLoginSuccess("codemobiles","testtt");
+        _mainPresenter.isLoginSuccess("codemobiles","testtt");
         verify(_mainView).showErrorMessageMaxLogin();
     }
 
+    @Test
+    public void testCheckMinInput(){
+        MainView _mainView = mock(MainView.class);
+        MainPresenter _mainPresenter = new MainPresenter(_mainView);
 
+        assertTrue(_mainPresenter.checkMinInput("ad","pass"));
+        assertFalse(_mainPresenter.checkMinInput("admin","password"));
+
+    }
+
+    @Test
+    public void testMinInputAndViewCalled(){
+        MainView _mainView = mock(MainView.class);
+        MainPresenter _mainPresenter = new MainPresenter(_mainView);
+
+        _mainPresenter.isLoginSuccess("admi","pass");
+        verify(_mainView).showMinMessage();
+    }
 
 }

@@ -12,4 +12,6 @@ public interface MainView {
 
     void showLoginSuccessMessage();
 
+    void showMinMessage();
+
 }

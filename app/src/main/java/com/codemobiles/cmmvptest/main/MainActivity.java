@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
         mUsernameEdittext = findViewById(R.id.username_editText);
         mPasswordEdittext = findViewById(R.id.password_editText);
         mLoginButton = findViewById(R.id.login_button);
+
+        mUsernameEdittext = null;
     }
 
     /**
@@ -69,5 +71,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void showLoginSuccessMessage() {
         Snackbar.make(mLoginButton, "Login Success", Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showMinMessage() {
+        Snackbar.make(mLoginButton, "input should be more than 5 characters", Snackbar.LENGTH_LONG).show();
     }
 }

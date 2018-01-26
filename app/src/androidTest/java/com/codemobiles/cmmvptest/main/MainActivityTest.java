@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
@@ -39,7 +40,33 @@ public class MainActivityTest {
     @Test
     public void testCheckErrorMessageIsDisplayedForEmptyData() {
         onView(withId(R.id.login_button)).check(matches(isDisplayed())).perform(click());
+        onView(withText("input should be more than 5 characters")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testCheckUsernamePassIncorrect(){
+        onView(withId(R.id.username_editText)).perform(typeText("oooooo"), closeSoftKeyboard());
+
+        onView(withId(R.id.password_editText)).perform(typeText("aaaaaa"), closeSoftKeyboard());
+        onView(withId(R.id.login_button)).perform(click());
+
         onView(withText("Username or Password Incorrect")).check(matches(isDisplayed()));
+
+    }
+
+    @Test
+    public void testCheckErrorMaxLogin(){
+        for(int i = 0; i < 4; i++){
+
+            onView(withId(R.id.username_editText)).perform(clearText());
+            onView(withId(R.id.password_editText)).perform(clearText());
+
+            onView(withId(R.id.username_editText)).perform(typeText("ooooo"),closeSoftKeyboard());
+            onView(withId(R.id.password_editText)).perform(typeText("aaaaa"),closeSoftKeyboard());
+            onView(withId(R.id.login_button)).perform(click());
+        }
+
+        onView(withText("Error! Login max limit")).check(matches(isDisplayed()));
     }
 
     @Test

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 26
@@ -17,6 +18,7 @@ android {
         }
 
         debug {
+            //ต้อง set เพื่อทำ report Coverage
             testCoverageEnabled = true
         }
     }
@@ -31,7 +33,17 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
+    //lib for integration test or other
     testCompile 'org.mockito:mockito-core:2.13.0'
 
+}
+
+apply plugin: 'io.fabric'
+
+dependencies {
+    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
+        transitive = true
+    }
+    compile 'com.google.firebase:firebase-core:11.4.2'
 }
 

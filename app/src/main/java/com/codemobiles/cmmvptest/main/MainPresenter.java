@@ -27,6 +27,11 @@ public class MainPresenter {
 
     public boolean isLoginSuccess(String _username, String _password) {
 
+        if (checkMinInput(_username,_password)){
+            mMainView.showMinMessage();
+            return false;
+        }
+
         if (_username.equals("admin") && _password.equals("password")) {
             mMainView.showLoginSuccessMessage();
             resetCountError();
@@ -41,5 +46,11 @@ public class MainPresenter {
         countErrorLogin();
         mMainView.showLoginInCorrect();
         return false;
+    }
+
+    public boolean checkMinInput(String ad, String pass) {
+        if (ad.length() >= 5 && pass.length() >= 5){return false;}
+        return true;
+
     }
 }
