@@ -19,6 +19,7 @@ public class MainPresenterTest {
 
         assertEquals(1, _mainPresenter.countErrorLogin());
         assertEquals(2, _mainPresenter.countErrorLogin());
+        assertEquals(3, _mainPresenter.countErrorLogin());
         assertTrue(_mainPresenter.isMaxErrorLogin());
     }
 
